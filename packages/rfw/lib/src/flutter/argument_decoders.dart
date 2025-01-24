@@ -781,35 +781,6 @@ class ArgumentDecoders {
   /// Extension mechanism for [gridDelegate].
   static final Map<String, ArgumentDecoder<SliverGridDelegate?>> gridDelegateDecoders = <String, ArgumentDecoder<SliverGridDelegate?>>{};
 
-  /// Returns an [IconData] from the specified map.
-  ///
-  /// If the map does not have an `icon` key that is an integer, returns null.
-  ///
-  /// Otherwise, returns an [IconData] with the [IconData.codePoint] set to the
-  /// integer from the `icon` key, the [IconData.fontFamily] set to the string
-  /// from the `fontFamily` key, and the [IconData.matchTextDirection] set to
-  /// the boolean from the `matchTextDirection` key (defaulting to false).
-  ///
-  /// For Material Design icons (those from the [Icons] class), the code point
-  /// can be obtained from the documentation for the icon, and the font family
-  /// is `MaterialIcons`. For example, [Icons.chalet] would correspond to
-  /// `{ icon: 0xe14f, fontFamily: 'MaterialIcons' }`.
-  ///
-  /// When building the release build of an application that uses the RFW
-  /// package, because this method creates non-const [IconData] objects
-  /// dynamically, the `--no-tree-shake-icons` option must be used.
-  static IconData? iconData(DataSource source, List<Object> key) {
-    final int? icon = source.v<int>([...key, 'icon']);
-    if (icon == null) {
-      return null;
-    }
-    return IconData(
-      icon,
-      fontFamily: source.v<String>([...key, 'fontFamily']),
-      matchTextDirection: source.v<bool>([...key, 'matchTextDirection']) ?? false,
-    );
-  }
-
   /// Returns an [IconThemeData] from the specified map.
   ///
   /// If the map is absent, returns null.
